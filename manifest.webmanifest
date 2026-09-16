@@ -1,0 +1,9 @@
+{
+  "name": "Eternal Sonata",
+  "short_name": "Eternal Sonata",
+  "description": "Portail de l'écosystème créatif",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#17131f",
+  "theme_color": "#292436"
+}

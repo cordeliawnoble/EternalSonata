@@ -1,0 +1,151 @@
+:root{--ivory:#fff7df;--gold:#f6d590;--gold2:#fff0bd;--night:#17142f;--violet:#4b397b;--glass:rgba(15,12,43,.62);--line:rgba(255,225,164,.46)}
+*{box-sizing:border-box}html{background:var(--night);scroll-behavior:smooth}body{margin:0;min-height:100vh;color:var(--ivory);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden;background:#17142f;position:relative}.world{position:fixed;inset:0;z-index:0;background-image:url("./assets/background.webp");background-position:center;background-size:cover;background-repeat:no-repeat;transform:scale(1.02);pointer-events:none}.veil{position:fixed;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(8,7,28,.25) 0%,rgba(14,10,40,.08) 35%,rgba(10,8,35,.38) 100%),radial-gradient(circle at 50% 15%,transparent 0 25%,rgba(7,6,27,.12) 60%,rgba(7,6,27,.48) 100%)}
+.shell{position:relative;z-index:2;width:min(1500px,calc(100% - 24px));margin:auto;padding:max(18px,env(safe-area-inset-top)) 0 max(34px,env(safe-area-inset-bottom))}.hero{min-height:38vh;display:flex;align-items:center;justify-content:center;gap:clamp(10px,3vw,40px);padding:24px 10px 12px;text-align:left}.emblem{width:clamp(110px,16vw,220px);height:auto;border-radius:50%;filter:drop-shadow(0 15px 35px rgba(6,3,30,.45));mix-blend-mode:screen}.hero-text{max-width:760px}.eyebrow{margin:0 0 6px;text-transform:uppercase;letter-spacing:.3em;font-size:.7rem;font-weight:800;color:#e7d5ff}h1,h2{font-family:Georgia,"Times New Roman",serif}h1{margin:0;font-size:clamp(3rem,8vw,7rem);font-weight:400;letter-spacing:-.055em;line-height:.9;text-shadow:0 0 26px rgba(255,221,160,.25),0 16px 55px rgba(7,5,28,.55)}.tagline{margin:18px 0;color:#f2e7ff;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(.95rem,2vw,1.25rem)}.music-button{border:1px solid var(--line);border-radius:999px;padding:10px 16px;color:var(--ivory);background:rgba(22,17,60,.55);backdrop-filter:blur(12px);font:inherit;cursor:pointer;box-shadow:0 8px 30px rgba(5,3,25,.22);transition:.25s ease}.music-button:hover{transform:translateY(-2px);border-color:var(--gold);box-shadow:0 0 28px rgba(255,218,143,.2)}.music-note{font-size:1.25rem;margin-right:8px;color:var(--gold)}
+
+.portals{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:clamp(10px,1.1vw,18px);
+  align-items:stretch;
+  padding:18px 0 34px;
+}
+.portal{
+  min-width:0;
+  position:relative;
+  border:1px solid rgba(255,232,190,.22);
+  border-radius:28px;
+  background:linear-gradient(180deg,rgba(20,16,54,.28),rgba(12,9,38,.72));
+  backdrop-filter:blur(8px);
+  overflow:hidden;
+  box-shadow:0 18px 44px rgba(5,3,28,.22);
+  transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+}
+.portal:hover,.portal:focus-within{
+  transform:translateY(-9px);
+  border-color:rgba(255,220,145,.65);
+  box-shadow:0 24px 54px rgba(5,3,28,.38),0 0 28px rgba(255,217,137,.10);
+  z-index:3;
+}
+.portal-link{display:flex;flex-direction:column;height:100%;color:inherit;text-decoration:none;outline:none}
+.portal-link:focus-visible{box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 7px #9e77ff}
+
+.art-wrap{
+  position:relative;
+  aspect-ratio:2/3;
+  overflow:hidden;
+  background:rgba(12,9,39,.16);
+  isolation:isolate;
+}
+.portal-art{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .65s cubic-bezier(.2,.8,.2,1),filter .45s ease;
+}
+.portal:hover .portal-art,.portal:focus-within .portal-art{
+  transform:scale(1.035);
+  filter:brightness(1.06) saturate(1.06);
+}
+
+/* Le visuel est désormais assumé comme une illustration de carte.
+   Aucun masque, aucun détourage, aucun blend-mode, aucun faux halo CSS. */
+.art-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:2;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent 68%,rgba(12,9,39,.24) 100%);
+}
+
+.portal-copy{
+  position:relative;
+  z-index:4;
+  flex:1;
+  text-align:center;
+  padding:13px 7px 12px;
+  border-top:1px solid rgba(255,224,164,.28);
+  background:linear-gradient(180deg,rgba(18,13,52,.84),rgba(10,8,35,.94));
+}
+.roman{display:block;font-size:.55rem;letter-spacing:.26em;color:#d8c5ff}
+.portal h2{font-size:clamp(1.05rem,1.55vw,1.55rem);font-weight:400;margin:3px 0 4px;color:#fff4d4;text-shadow:0 0 18px rgba(255,216,137,.22)}
+.portal p{margin:0;font-size:clamp(.55rem,.78vw,.75rem);text-transform:uppercase;letter-spacing:.11em;color:#e9def5;line-height:1.4}
+
+/* FX communs */
+.fx{position:absolute;pointer-events:none;z-index:5}
+
+/* SONATE */
+.fx-note{color:#fff2b8;text-shadow:0 0 14px #ffd978;font-size:clamp(15px,2vw,28px);opacity:0}
+.n1{left:31%;top:58%}.n2{left:54%;top:46%}.n3{left:66%;top:60%}
+.portal-sonate:is(:hover,:focus-within) .fx-note{animation:noteFly 1.8s ease-out infinite}
+.portal-sonate:is(:hover,:focus-within) .n2{animation-delay:.25s}
+.portal-sonate:is(:hover,:focus-within) .n3{animation-delay:.5s}
+@keyframes noteFly{0%{opacity:0;transform:translate(0,10px) rotate(-8deg)}20%{opacity:1}100%{opacity:0;transform:translate(18px,-95px) rotate(14deg)}}
+
+/* PEPINIERE */
+.sprout{left:50%;bottom:25%;font-size:24px;color:#f5ffbd;text-shadow:0 0 18px #bfff84;opacity:0}
+.portal-pepiniere:is(:hover,:focus-within) .sprout{animation:grow 1.55s ease-out infinite}
+@keyframes grow{0%{opacity:0;transform:translate(-50%,8px) scale(.2)}45%{opacity:1}100%{opacity:0;transform:translate(-50%,-58px) scale(1.55)}}
+
+/* PASSERELLE : le chemin part du livre et rejoint réellement la porte */
+.rainbow-bridge{inset:7% 8% 8%;width:84%;height:85%;overflow:visible;opacity:0;filter:drop-shadow(0 0 8px rgba(255,240,205,.55))}
+.bridge-path{fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:190;stroke-dashoffset:190}
+.bridge-glow{stroke:#fff4cf;stroke-width:5.4;opacity:.30;filter:url(#passerelleGlow)}
+.bridge-core{stroke:url(#passerelleRainbow);stroke-width:3;filter:url(#passerelleGlow)}
+.gate-flash{fill:#fff7cf;opacity:0;transform-box:fill-box;transform-origin:center;filter:drop-shadow(0 0 8px #ffe8a3)}
+.portal-passerelle:is(:hover,:focus-within) .rainbow-bridge{opacity:1}
+.portal-passerelle:is(:hover,:focus-within) .bridge-path{animation:passageDraw 1.15s cubic-bezier(.35,.05,.2,1) forwards}
+.portal-passerelle:is(:hover,:focus-within) .gate-flash{animation:gateWake .55s 1s ease-out forwards}
+@keyframes passageDraw{to{stroke-dashoffset:0}}
+@keyframes gateWake{0%{opacity:0;transform:scale(.3)}45%{opacity:1;transform:scale(2.7)}100%{opacity:.9;transform:scale(1.1)}}
+
+/* PASSE-AILES */
+.feather{right:23%;top:25%;font-size:48px;color:#fff5ff;text-shadow:0 0 22px #c9b7ff;opacity:0}
+.portal-passeailes:is(:hover,:focus-within) .feather{animation:wing 1.9s ease-in-out infinite}
+@keyframes wing{0%{opacity:0;transform:rotate(-10deg) scale(.7)}35%{opacity:.85}60%{transform:rotate(8deg) scale(1.05)}100%{opacity:0;transform:translate(10px,-22px) rotate(15deg)}}
+
+/* NOVA */
+.shooting-star{width:78px;height:2px;top:22%;left:12%;background:linear-gradient(90deg,transparent,#fff5d0);box-shadow:15px 0 10px #fff;opacity:0;transform:rotate(-18deg)}
+.portal-nova:is(:hover,:focus-within) .shooting-star{animation:shoot 1.65s ease-out infinite}
+@keyframes shoot{0%{opacity:0;transform:translate(-45px,25px) rotate(-18deg)}20%{opacity:1}100%{opacity:0;transform:translate(135px,-45px) rotate(-18deg)}}
+
+/* TODUM */
+.drop{width:11px;height:15px;border-radius:60% 40% 60% 40%;background:linear-gradient(145deg,#fff,#8ddfff 55%,#b79aff);left:50%;top:30%;opacity:0;transform:translateX(-50%) rotate(45deg);box-shadow:0 0 14px #a8eaff}
+.ripple{left:50%;bottom:25%;width:16px;height:6px;border:1.5px solid #c8efff;border-radius:50%;opacity:0;transform:translateX(-50%)}
+.portal-todum:is(:hover,:focus-within) .drop{animation:drop 1.65s ease-in infinite}
+.portal-todum:is(:hover,:focus-within) .r1{animation:ripple 1.65s .72s ease-out infinite}
+.portal-todum:is(:hover,:focus-within) .r2{animation:ripple 1.65s .9s ease-out infinite}
+@keyframes drop{0%{opacity:0;top:28%}15%{opacity:1}62%{opacity:1;top:68%}64%,100%{opacity:0;top:68%}}
+@keyframes ripple{0%{opacity:.9;transform:translateX(-50%) scale(.4)}100%{opacity:0;transform:translateX(-50%) scale(4.5)}}
+
+.closing{text-align:center;max-width:760px;margin:16px auto 28px;padding:14px 20px;color:#f8eaff;font-family:Georgia,"Times New Roman",serif;font-style:italic;font-size:clamp(.9rem,1.7vw,1.1rem);text-shadow:0 2px 14px #090622}
+footer{display:flex;justify-content:space-between;gap:16px;border-top:1px solid rgba(255,232,189,.2);padding:16px 4px 0;color:#d9cfe8;font-size:.75rem}
+dialog{width:min(440px,calc(100% - 30px));border:1px solid rgba(255,225,168,.45);border-radius:28px;padding:28px;background:rgba(21,16,53,.96);color:#fff7df;box-shadow:0 30px 100px #07051f}
+dialog::backdrop{background:rgba(7,5,24,.72);backdrop-filter:blur(8px)}
+dialog h2{font-weight:400;font-size:1.7rem}dialog p{color:#ded3ed;line-height:1.55}
+dialog button{border:1px solid var(--line);border-radius:999px;padding:10px 18px;background:#3e306c;color:white;cursor:pointer}
+.dialog-star{font-size:2rem;color:var(--gold);margin-bottom:8px}
+
+@media(max-width:1100px){
+  .portals{grid-template-columns:repeat(3,1fr);max-width:900px;margin:auto;gap:18px}
+  .hero{min-height:32vh}.portal h2{font-size:1.4rem}.portal p{font-size:.7rem}
+}
+@media(max-width:650px){
+  .shell{width:min(100% - 18px,520px)}
+  .hero{min-height:auto;display:block;text-align:center;padding:24px 4px 20px}
+  .emblem{width:118px}.hero-text{margin-top:-8px}h1{font-size:3.2rem}.tagline{margin:12px 0}
+  .portals{grid-template-columns:repeat(2,1fr);gap:12px}
+  .portal{border-radius:20px}
+  .portal:hover,.portal:focus-within{transform:translateY(-4px)}
+  .portal-copy{padding:9px 4px 9px}.portal h2{font-size:1.08rem}.portal p{font-size:.53rem;letter-spacing:.08em}
+  .closing{margin-top:4px}footer{font-size:.65rem}
+}
+@media(max-width:370px){.portals{grid-template-columns:1fr;max-width:250px}.portal p{font-size:.6rem}}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}
+  .portal:hover,.portal:focus-within{transform:none}
+  .portal-passerelle:is(:hover,:focus-within) .bridge-path{stroke-dashoffset:0}
+  .portal-passerelle:is(:hover,:focus-within) .gate-flash{opacity:.8}
+}
